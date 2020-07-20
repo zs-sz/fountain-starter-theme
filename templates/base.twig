@@ -5,41 +5,67 @@
 	{% endblock %}
 	</head>
 {% endblock %}
+<!-- <body class="bg bg--light" style="height: 100%; background-image: url({{site.theme.link}}/static/bg_light.png);"> -->
+<body class="bg bg--light {{body_class}}" style="height: 100%;">
+<div class="site ">
+  <div class="off-canvas-wrapper">
+    <div class="off-canvas position-left" id="offCanvasLeft1" data-off-canvas>
+    	{% include "mobile-left-offcanvas.twig" with {'menu': menu.get_items, 'layout': 'vertical'} %}
+    </div>
 
-	<body class="{{body_class}}" data-template="base.twig">
-		<a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
-		<header class="header" >
-			{% block header %}
-				<div class="wrapper">
-					<h1 class="hdr-logo" role="banner">
-						<a class="hdr-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a>
+    <div class="off-canvas position-right" id="offCanvasRight1" data-off-canvas></div>
+    <div class="off-canvas position-top" id="offCanvasTop1" data-off-canvas></div>
+    <div class="off-canvas position-bottom" id="offCanvasBottom1" data-off-canvas></div>
+	
+    <div class="off-canvas-content" data-off-canvas-content>
+  
+<!-- 		<button type="button" class="button" data-toggle="offCanvasRight1">Open Right</button>
+				 <button type="button" class="button" data-toggle="offCanvasTop1">Open Top</button>
+				 <button type="button" class="button" data-toggle="offCanvasBottom1">Open Bottom</button> -->
+			<div >
+				<header class="header-main">
+				<div class="branding">
+					<h1 class="site-title">
+						<a href="{{site.link}}">{{site.title}}</a>
 					</h1>
-					<nav id="nav-main" class="nav-main" role="navigation">
-						{% include "menu.twig" with {'menu': menu.get_items} %}
-					</nav><!-- #nav -->
 				</div>
-			{% endblock %}
-		</header>
-
-		<section id="content" role="main" class="content-wrapper">
-			{% if title %}<h1>{{title}}</h1>{% endif %}
-			<div class="wrapper {{sidebar_class}}">
-				{% block content %}
-					Sorry, no content
-				{% endblock %}
+				<nav id="nav-main" class="nav-main" role="navigation">
+						<div class="show-for-large">
+							{% include "menu.twig" with {'menu': menu.get_items, 'layout': 'horizontal'} %}
+						</div>
+					  <a href="#" class="hide-for-large trigger" data-toggle="offCanvasLeft1">
+					   {% include 'partial/menu-icon.twig' %} 
+					 </a>
+				</nav>
+			</header>
+			
 			</div>
-			{% if sidebar %}
-				<aside class="layout-sidebar">
-					{{sidebar}}
-				</aside>
-			{% endif %}
-		</section>
 
-		{% block footer %}
-			<footer id="footer">
+    </div>
+
+    {% block content %}
+        
+    {% endblock %}
+  </div>
+</div>
+
+{% block footer %}
+
+    <footer class="main">
 				{% include 'footer.twig' %}
-			</footer>
-			{{ function('wp_footer') }}
-		{% endblock %}
-	</body>
+		</footer>
+{% endblock %}
+	{{function('wp_footer')}}
+  <script src="{{site.theme.link}}/dist/app.js"></script>
 </html>
+
+<style>
+  .nav-main a.trigger {
+    display: block;
+  }
+  .nav-main a.trigger svg {
+    width: 30px;
+    height: 30px;
+  }
+
+</style>

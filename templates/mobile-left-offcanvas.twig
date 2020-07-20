@@ -1,0 +1,10 @@
+<aside class="offcanvas-content-wrapper bg bg--dark">
+	<ul class="menu vertical">
+	{% for item in menu %}
+		<li>
+					<a class="meta-label {{item.classes | join(' ') }}" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
+		</li>
+	{% endfor %}
+		
+	</ul>
+</aside>

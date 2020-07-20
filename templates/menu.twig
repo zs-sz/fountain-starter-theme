@@ -1,10 +1,12 @@
 {% if menu %}
-	<ul>
+<div class="temp-nav">
+
 	{% for item in menu %}
-		<li class="{{ item.classes | join(' ') }}">
-			<a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
-			{% include "menu.twig" with {'menu': item.get_children} %}
-		</li>
+		<a class="meta-label {{item.classes | join(' ') }}" target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}</a>
 	{% endfor %}
-	</ul>
+
+<style>
+
+</style>
+</div>
 {% endif %}
